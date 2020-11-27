@@ -3,6 +3,9 @@ using Hazzik.Qif.Transactions.Fields;
 
 namespace Hazzik.Qif.Parsers
 {
+    /// <summary>
+    /// Abstract class that parses for the <see cref="NonInvestmentAccountFields"/>
+    /// </summary>
     abstract class BasicTransactionParser : IParser
     {
         protected BasicTransaction Item = new BasicTransaction();
@@ -19,6 +22,9 @@ namespace Hazzik.Qif.Parsers
                     break;
                 case NonInvestmentAccountFields.Amount:
                     Item.Amount = Common.GetDecimal(value);
+                    break;
+                case NonInvestmentAccountFields.AmountU:
+                    Item.AmountU = Common.GetDecimal(value);
                     break;
                 case NonInvestmentAccountFields.ClearedStatus:
                     Item.ClearedStatus = value;
@@ -39,14 +45,18 @@ namespace Hazzik.Qif.Parsers
                     Item.Address.Add(value);
                     break;
                 case NonInvestmentAccountFields.SplitCategory:
-                    Item.SplitCategories.Add(Item.SplitCategories.Count, value);
+                    Item.Splits.Add(new SplitTransaction { Category = value });
                     break;
                 case NonInvestmentAccountFields.SplitMemo:
-                    // NOTE: I use split amount count because memos are optional
-                    Item.SplitMemos.Add(Item.SplitAmounts.Count, value);
+                    if(Item.Splits.Count > 0)
+                        Item.Splits[Item.Splits.Count - 1].Memo = value;
                     break;
                 case NonInvestmentAccountFields.SplitAmount:
-                    Item.SplitAmounts.Add(Item.SplitAmounts.Count, Common.GetDecimal(value));
+                    if (Item.Splits.Count > 0)
+                        Item.Splits[Item.Splits.Count - 1].Amount = Common.GetDecimal(value);
+                    break;
+                default:
+                    Item.ignoredLines.Add(line);
                     break;
             }
         }

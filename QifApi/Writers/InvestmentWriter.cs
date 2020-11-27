@@ -16,48 +16,12 @@ namespace Hazzik.Qif.Writers
 
                 foreach (InvestmentTransaction item in list)
                 {
-                    if (!string.IsNullOrEmpty(item.AccountForTransfer))
-                    {
-                        writer.Write(InvestmentAccountFields.AccountForTransfer);
-                        writer.WriteLine(item.AccountForTransfer);
-                    }
+                    writer.WriteLine($"{InvestmentAccountFields.Date}{item.Date:d}");
 
                     if (!string.IsNullOrEmpty(item.Action))
                     {
                         writer.Write(InvestmentAccountFields.Action);
                         writer.WriteLine(item.Action);
-                    }
-
-                    writer.Write(InvestmentAccountFields.AmountTransferred);
-                    writer.WriteLine(item.AmountTransferred.ToString(CultureInfo.CurrentCulture));
-
-                    if (!string.IsNullOrEmpty(item.ClearedStatus))
-                    {
-                        writer.Write(InvestmentAccountFields.ClearedStatus);
-                        writer.WriteLine(item.ClearedStatus);
-                    }
-
-                    writer.Write(InvestmentAccountFields.Commission);
-                    writer.WriteLine(item.Commission.ToString(CultureInfo.CurrentCulture));
-
-                    writer.Write(InvestmentAccountFields.Date);
-                    writer.WriteLine(item.Date.ToString("d"));
-
-                    if (!string.IsNullOrEmpty(item.Memo))
-                    {
-                        writer.Write(InvestmentAccountFields.Memo);
-                        writer.WriteLine(item.Memo);
-                    }
-                    writer.Write(InvestmentAccountFields.Price);
-                    writer.WriteLine(item.Price.ToString(CultureInfo.CurrentCulture));
-
-                    writer.Write(InvestmentAccountFields.Quantity);
-                    writer.WriteLine(item.Quantity.ToString(CultureInfo.CurrentCulture));
-
-                    if (!string.IsNullOrEmpty(item.Security))
-                    {
-                        writer.Write(InvestmentAccountFields.Security);
-                        writer.WriteLine(item.Security);
                     }
 
                     if (!string.IsNullOrEmpty(item.TextFirstLine))
@@ -66,8 +30,47 @@ namespace Hazzik.Qif.Writers
                         writer.WriteLine(item.TextFirstLine);
                     }
 
-                    writer.Write(InvestmentAccountFields.TransactionAmount);
-                    writer.WriteLine(item.TransactionAmount.ToString(CultureInfo.CurrentCulture));
+                    if (!string.IsNullOrEmpty(item.Security))
+                    {
+                        writer.Write(InvestmentAccountFields.Security);
+                        writer.WriteLine(item.Security);
+                    }
+
+                    if (item.Price.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.Price}{item.Price}");
+
+                    if (item.Quantity.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.Quantity}{item.Quantity:#,##0.##########}");
+
+                    if (!string.IsNullOrEmpty(item.ClearedStatus))
+                    {
+                        writer.Write(InvestmentAccountFields.ClearedStatus);
+                        writer.WriteLine(item.ClearedStatus);
+                    }
+
+                    if (item.TransactionAmountU.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.TransactionAmountU}{item.TransactionAmountU:n}");
+
+                    if (item.TransactionAmount.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.TransactionAmount}{item.TransactionAmount:n}");
+
+                    if (!string.IsNullOrEmpty(item.Memo))
+                    {
+                        writer.Write(InvestmentAccountFields.Memo);
+                        writer.WriteLine(item.Memo);
+                    }
+
+                    if (item.Commission.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.Commission}{item.Commission:n}");
+
+                    if (!string.IsNullOrEmpty(item.AccountForTransfer))
+                    {
+                        writer.Write(InvestmentAccountFields.AccountForTransfer);
+                        writer.WriteLine(item.AccountForTransfer);
+                    }
+
+                    if (item.AmountTransferred.HasValue)
+                        writer.WriteLine($"{InvestmentAccountFields.AmountTransferred}{item.AmountTransferred:n}");
 
                     writer.WriteLine(InformationFields.EndOfEntry);
                 }

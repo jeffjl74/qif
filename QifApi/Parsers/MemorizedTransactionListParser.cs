@@ -9,7 +9,7 @@ namespace Hazzik.Qif.Parsers
 
         public void Yield(QifDocument document)
         {
-            document.MemorizedTransactionListTransactions.Add(item);
+            document.AddTransaction(GetType().Name, item);
             item = new MemorizedTransactionListTransaction();
         }
 
@@ -45,6 +45,9 @@ namespace Hazzik.Qif.Parsers
                 case MemorizedTransactionListFields.Amount:
                     item.Amount = Common.GetDecimal(value);
                     break;
+                case MemorizedTransactionListFields.AmountU:
+                    item.AmountU = Common.GetDecimal(value);
+                    break;
                 case MemorizedTransactionListFields.Category:
                     item.Category = value;
                     break;
@@ -78,14 +81,21 @@ namespace Hazzik.Qif.Parsers
                     item.Payee = value;
                     break;
                 case MemorizedTransactionListFields.SplitAmount:
-                    item.SplitAmounts.Add(item.SplitAmounts.Count, Common.GetDecimal(value));
+                    //item.SplitAmounts.Add(item.SplitAmounts.Count, Common.GetDecimal(value));
+                    if (item.Splits.Count > 0)
+                        item.Splits[item.Splits.Count - 1].Amount = Common.GetDecimal(value);
                     break;
                 case MemorizedTransactionListFields.SplitCategory:
-                    item.SplitCategories.Add(item.SplitCategories.Count, value);
+                    //item.SplitCategories.Add(item.SplitCategories.Count, value);
+                    item.Splits.Add(new SplitTransaction { Category = value });
                     break;
                 case MemorizedTransactionListFields.SplitMemo:
-                    // NOTE: Using split amount count because memo is optional
-                    item.SplitMemos.Add(item.SplitAmounts.Count, value);
+                    //item.SplitMemos.Add(item.SplitAmounts.Count, value);
+                    if (item.Splits.Count > 0)
+                        item.Splits[item.Splits.Count - 1].Memo = value;
+                    break;
+                default:
+                    item.ignoredLines.Add(line);
                     break;
             }
         }

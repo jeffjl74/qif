@@ -42,6 +42,31 @@ namespace Hazzik.Qif
 
             if (decimal.TryParse(value, out result) == false)
             {
+                // !Type:Price can include fractions, like '92 1/2'
+                // check for that
+                string[] split = value.Split(new char[] { ' ', '/' });
+
+                if (split.Length == 2 || split.Length == 3)
+                {
+                    int a, b;
+
+                    if (int.TryParse(split[0], out a) && int.TryParse(split[1], out b))
+                    {
+                        if (split.Length == 2 && b != 0)
+                        {
+                            return (decimal)a / b;
+                        }
+
+                        int c;
+
+                        if (int.TryParse(split[2], out c))
+                        {
+                            if(c != 0)
+                                return a + (decimal)b / c;
+                        }
+                    }
+                }
+
                 throw new InvalidCastException(Resources.InvalidDecimalFormat);
             }
 

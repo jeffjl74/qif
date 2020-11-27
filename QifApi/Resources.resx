@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicTransactionDisplay" xml:space="preserve">
-    <value>Date: {0}, Payee: {1}, Amount: {2}</value>
+    <value>Date: {0}, Payee: {1}, Amount: {2:c}</value>
   </data>
   <data name="InvalidBankTransaction" xml:space="preserve">
     <value>Invalid bank transaction: {0}</value>
@@ -136,9 +136,9 @@
     <value>Invalid transaction type.</value>
   </data>
   <data name="InvestmentTransactionDisplay" xml:space="preserve">
-    <value>Date: {0}, Text: {1}, Amount: {2}</value>
+    <value>Date: {0}, Symbol: {1}, Amount: {2:c}</value>
   </data>
   <data name="MemorizedTransactionDisplay" xml:space="preserve">
-    <value>Payee: {0}, Amount: {1}</value>
+    <value>Payee: {0}, Amount: {1:c}</value>
   </data>
 </root>

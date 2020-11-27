@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Hazzik.Qif.Transactions;
@@ -16,8 +17,11 @@ namespace Hazzik.Qif.Writers
 
                 foreach (var item in list)
                 {
-                    writer.Write(CategoryListFields.BudgetAmount);
-                    writer.WriteLine(item.BudgetAmount.ToString(CultureInfo.CurrentCulture));
+                    if (item.BudgetAmount.HasValue)
+                    {
+                        writer.Write(CategoryListFields.BudgetAmount);
+                        writer.WriteLine(item.BudgetAmount.Value.ToString(CultureInfo.CurrentCulture));
+                    }
 
                     if (!string.IsNullOrEmpty(item.CategoryName))
                     {
@@ -31,20 +35,20 @@ namespace Hazzik.Qif.Writers
                         writer.WriteLine(item.Description);
                     }
 
-                    writer.Write(CategoryListFields.ExpenseCategory);
-                    writer.WriteLine(item.ExpenseCategory.ToString());
-
-                    writer.Write(CategoryListFields.IncomeCategory);
-                    writer.WriteLine(item.IncomeCategory.ToString());
-
-                    writer.Write(CategoryListFields.TaxRelated);
-                    writer.WriteLine(item.TaxRelated.ToString());
+                    if(item.TaxRelated)
+                        writer.WriteLine(CategoryListFields.TaxRelated);
 
                     if (!string.IsNullOrEmpty(item.TaxSchedule))
                     {
                         writer.Write(CategoryListFields.TaxSchedule);
                         writer.WriteLine(item.TaxSchedule);
                     }
+
+                    if (item.IncomeCategory)
+                        writer.WriteLine(CategoryListFields.IncomeCategory);
+
+                    if (item.ExpenseCategory)
+                        writer.WriteLine(CategoryListFields.ExpenseCategory);
 
                     writer.WriteLine(InformationFields.EndOfEntry);
                 }

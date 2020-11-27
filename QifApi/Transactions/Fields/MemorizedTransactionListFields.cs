@@ -10,11 +10,14 @@ namespace Hazzik.Qif.Transactions.Fields
         /// Transaction
         /// </summary>
         public const char Transaction = 'K';
-
         /// <summary>
         /// Amount
         /// </summary>
         public const char Amount = 'T';
+        /// <summary>
+        /// Amount from the U line
+        /// </summary>
+        public const char AmountU = 'U';
         /// <summary>
         /// Cleared status
         /// </summary>
@@ -47,6 +50,10 @@ namespace Hazzik.Qif.Transactions.Fields
         /// Dollar amount of split
         /// </summary>
         public const char SplitAmount = '$';
+        /// <summary>
+        /// Percentage of split
+        /// </summary>
+        public const char SplitPercentage = '%';
         /// <summary>
         /// Amortization: First payment date
         /// </summary>

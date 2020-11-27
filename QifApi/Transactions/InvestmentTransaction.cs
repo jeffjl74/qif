@@ -30,19 +30,25 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the price.
         /// </summary>
         /// <value>The price.</value>
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         /// <summary>
         /// Gets or sets the quantity.
         /// </summary>
         /// <value>The quantity.</value>
-        public decimal Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <summary>
         /// Gets or sets the transaction amount.
         /// </summary>
         /// <value>The transaction amount.</value>
-        public decimal TransactionAmount { get; set; }
+        public decimal? TransactionAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the transaction amount from the U line
+        /// </summary>
+        /// <value>The transaction amount.</value>
+        public decimal? TransactionAmountU { get; set; }
 
         /// <summary>
         /// Gets or sets the cleared status.
@@ -66,7 +72,7 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the commission.
         /// </summary>
         /// <value>The commission.</value>
-        public decimal Commission { get; set; }
+        public decimal? Commission { get; set; }
 
         /// <summary>
         /// Gets or sets the account for transfer.
@@ -78,7 +84,7 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the amount transferred.
         /// </summary>
         /// <value>The amount transferred.</value>
-        public decimal AmountTransferred { get; set; }
+        public decimal? AmountTransferred { get; set; }
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -88,7 +94,11 @@ namespace Hazzik.Qif.Transactions
         /// </returns>
         public override string ToString()
         {
-            return string.Format(Resources.Culture, Resources.InvestmentTransactionDisplay, Date.ToString("d", CultureInfo.CurrentCulture), TextFirstLine, TransactionAmount.ToString("C2", CultureInfo.CurrentCulture));
+            return string.Format(Resources.Culture, 
+                Resources.InvestmentTransactionDisplay, 
+                Date.ToString("d", CultureInfo.CurrentCulture), 
+                Security, 
+                TransactionAmount);
         }
     }
 }

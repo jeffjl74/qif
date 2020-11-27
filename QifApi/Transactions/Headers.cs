@@ -46,5 +46,25 @@ namespace Hazzik.Qif.Transactions
         /// Memorized transaction list
         /// </summary>
         public const string MemorizedTransactionList = "!Type:Memorized";
+        /// <summary>
+        /// Security list
+        /// </summary>
+        public const string SecurityList = "!Type:Security";
+        /// <summary>
+        /// Tag list
+        /// </summary>
+        public const string TagList = "!Type:Tag";
+        /// <summary>
+        /// Security Prices list
+        /// </summary>
+        public const string PriceList = "!Type:Prices";
+        /// <summary>
+        /// Start of the Accounts list
+        /// </summary>
+        public const string OptionAutoswitch = "!Option:AutoSwitch";
+        /// <summary>
+        /// End of the Accounts list
+        /// </summary>
+        public const string ClearAutoswitch = "!Clear:AutoSwitch";
     }
 }

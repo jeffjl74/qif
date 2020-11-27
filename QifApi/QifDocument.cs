@@ -15,6 +15,12 @@ namespace Hazzik.Qif
     public class QifDocument
     {
         /// <summary>
+        /// Set 'true' upon encoutering a !Option:AutoSwitch when loading a QIF file.
+        /// Set 'false' upon encountering a !Clear:AutoSwitch.
+        /// </summary>
+        public bool isAutoSwitch = false;
+
+        /// <summary>
         /// Represents a collection of bank transactions.
         /// </summary>
         public IList<BasicTransaction> BankTransactions { get; } = new List<BasicTransaction>();
@@ -47,7 +53,7 @@ namespace Hazzik.Qif
         /// <summary>
         /// Represents a collection of account list transactions.
         /// </summary>
-        public IList<AccountListTransaction> AccountListTransactions { get; } = new List<AccountListTransaction>();
+        public IList<AccountListTransaction> AccountList { get; } = new List<AccountListTransaction>();
 
         /// <summary>
         /// Represents a collection of category list transactions.
@@ -65,6 +71,31 @@ namespace Hazzik.Qif
         public IList<MemorizedTransactionListTransaction> MemorizedTransactionListTransactions { get; } = new List<MemorizedTransactionListTransaction>();
 
         /// <summary>
+        /// Represents a collection of tags.
+        /// </summary>
+        public IList<TagTransaction> TagTransactions { get; } = new List<TagTransaction>();
+
+        /// <summary>
+        /// Represents a collection of securities.
+        /// </summary>
+        public IList<PriceRecord> PriceTransactions { get; } = new List<PriceRecord>();
+
+        /// <summary>
+        /// Represents a collection of securities.
+        /// </summary>
+        public IList<SecurityTransaction> SecurityTransactions { get; } = new List<SecurityTransaction>();
+
+        /// <summary>
+        /// A collection of accounts with their associated transactions. Activated via !Option:AutoSwitch
+        /// </summary>
+        public AutoSwitchAccountList AutoSwitchAccountList { get; } = new AutoSwitchAccountList();
+
+        /// <summary>
+        /// A collection of unrecognized lines
+        /// </summary>
+        public IList<UnhandledTypeTransaction> UnhandledTypeTransactions { get; } = new List<UnhandledTypeTransaction>();
+
+        /// <summary>
         /// Saves the QIF document to the <see cref="Stream"/>.
         /// </summary>
         public void Save(Stream stream)
@@ -80,16 +111,22 @@ namespace Hazzik.Qif
         /// </summary>
         public void Save(TextWriter writer)
         {
-            AccountListWriter.Write(writer, AccountListTransactions);
+            TagListWriter.Write(writer, TagTransactions);
+            CategoryListWriter.Write(writer, CategoryListTransactions);
+            ClassListWriter.Write(writer, ClassListTransactions);
+            AccountListWriter.Write(writer, AccountList);
+            AutoSwitchAccountListWriter.Write(writer, AutoSwitchAccountList, SecurityTransactions);
+            // SecurityTransactions were written by AutoSwitchAccountListWriter if it had any accounts
+            if (AutoSwitchAccountList.autoSwitchAccounts.Count == 0)
+                SecurityListWriter.Write(writer, SecurityTransactions);
             BasicTransactionWriter.Write(writer, Headers.Asset, AssetTransactions);
             BasicTransactionWriter.Write(writer, Headers.Bank, BankTransactions);
             BasicTransactionWriter.Write(writer, Headers.Cash, CashTransactions);
             BasicTransactionWriter.Write(writer, Headers.CreditCard, CreditCardTransactions);
             BasicTransactionWriter.Write(writer, Headers.Liability, LiabilityTransactions);
-            CategoryListWriter.Write(writer, CategoryListTransactions);
-            ClassListWriter.Write(writer, ClassListTransactions);
             InvestmentWriter.Write(writer, InvestmentTransactions);
             MemorizedTransactionListWriter.Write(writer, MemorizedTransactionListTransactions);
+            PriceListWriter.Write(writer, PriceTransactions);
         }
 
         /// <summary>
@@ -102,6 +139,66 @@ namespace Hazzik.Qif
             {
                 Save(writer);
                 return writer.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Adds a transaction to the appropriate transaction list.
+        /// </summary>
+        /// <param name="parserName">The GetType().Name of the parser that is adding a transaction.</param>
+        /// <param name="transaction">The transaction to add.</param>
+        public void AddTransaction(string parserName, object transaction)
+        {
+            bool isAutoAcct = false;
+
+            // first, see if we are associating transactions with an account via !Option:AutoSwitch
+            if (isAutoSwitch)
+                isAutoAcct = AutoSwitchAccountList.AddTransaction(parserName, transaction);
+            if(!isAutoAcct)
+            {
+                // this transaction does not associate with a particular account
+
+                if (parserName == typeof(AccountListParser).Name)
+                    AccountList.Add((AccountListTransaction)transaction);
+
+                else if (parserName == typeof(AssetParser).Name)
+                    AssetTransactions.Add((BasicTransaction)transaction);
+
+                else if (parserName == typeof(BankParser).Name)
+                    BankTransactions.Add((BasicTransaction)transaction);
+
+                else if (parserName == typeof(CashParser).Name)
+                    CashTransactions.Add((BasicTransaction)transaction);
+
+                else if (parserName == typeof(CategoryListParser).Name)
+                    CategoryListTransactions.Add((CategoryListTransaction)transaction);
+
+                else if (parserName == typeof(ClassListParser).Name)
+                    ClassListTransactions.Add((ClassListTransaction)transaction);
+
+                else if (parserName == typeof(CreditCardParser).Name)
+                    CreditCardTransactions.Add((BasicTransaction)transaction);
+
+                else if (parserName == typeof(InvestmentParser).Name)
+                    InvestmentTransactions.Add((InvestmentTransaction)transaction);
+
+                else if (parserName == typeof(LiabilityParser).Name)
+                    LiabilityTransactions.Add((BasicTransaction)transaction);
+
+                else if (parserName == typeof(MemorizedTransactionListParser).Name)
+                    MemorizedTransactionListTransactions.Add((MemorizedTransactionListTransaction)transaction);
+                
+                else if (parserName == typeof(PriceParser).Name)
+                    PriceTransactions.Add((PriceRecord)transaction);
+
+                else if (parserName == typeof(SecurityParser).Name)
+                    SecurityTransactions.Add((SecurityTransaction)transaction);
+
+                else if (parserName == typeof(TagParser).Name)
+                    TagTransactions.Add((TagTransaction)transaction);
+
+                else if (parserName == typeof(UnhandledTypeParser).Name)
+                    UnhandledTypeTransactions.Add((UnhandledTypeTransaction)transaction);
             }
         }
 
@@ -138,7 +235,7 @@ namespace Hazzik.Qif
         /// <returns>A QifDocument object of transactions imported.</returns>
         public static QifDocument Load(TextReader reader)
         {
-            var result = new QifDocument();
+            var document = new QifDocument();
 
             string line;
             IParser parser = null;
@@ -148,10 +245,19 @@ namespace Hazzik.Qif
                 {
                     case InformationFields.TransactionType:
                         parser = CreateParser(line);
+                        if(parser == null)
+                        {
+                            // AutoSwitch is a special case. They have no following lines.
+                            // So just process them directly.
+                            if (line.Equals(Headers.OptionAutoswitch))
+                                document.isAutoSwitch = true;
+                            else if (line.Equals(Headers.ClearAutoswitch))
+                                document.isAutoSwitch = false;
+                        }
                         break;
                     case InformationFields.EndOfEntry:
                         Debug.Assert(parser != null, "parser != null");
-                        parser.Yield(result);
+                        parser.Yield(document);
                         break;
                     default:
                         Debug.Assert(parser != null, "parser != null");
@@ -160,12 +266,12 @@ namespace Hazzik.Qif
                 }
             }
 
-            return result;
+            return document;
         }
 
         private static IParser CreateParser(string line)
         {
-            switch (line)
+            switch (line.Trim())
             {
                 case Headers.Bank  :
                     return new BankParser();
@@ -187,9 +293,22 @@ namespace Hazzik.Qif
                     return new ClassListParser();
                 case Headers.MemorizedTransactionList:
                     return new MemorizedTransactionListParser();
+                case Headers.SecurityList:
+                    return new SecurityParser();
+                case Headers.TagList:
+                    return new TagParser();
+                case Headers.PriceList:
+                    return new PriceParser();
+
+                // these are handled in Load()
+                // since they contain no data and act like a toggle switch
+                case Headers.ClearAutoswitch:
+                case Headers.OptionAutoswitch:
+                    return null;
 
                 default:
-                    throw new NotSupportedException("The transaction type '" + line + "' is not supported");
+                    return new UnhandledTypeParser(line);
+
             }
         }
     }

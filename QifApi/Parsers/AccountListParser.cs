@@ -9,7 +9,7 @@ namespace Hazzik.Qif.Parsers
 
         public void Yield(QifDocument document)
         {
-            document.AccountListTransactions.Add(item);
+            document.AddTransaction(GetType().Name, item);
             item = new AccountListTransaction();
         }
 
@@ -35,6 +35,9 @@ namespace Hazzik.Qif.Parsers
                     break;
                 case AccountInformationFields.StatementBalanceDate:
                     item.StatementBalanceDate = Common.GetDateTime(value);
+                    break;
+                default:
+                    item.ignoredLines.Add(line);
                     break;
             }
         }

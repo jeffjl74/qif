@@ -6,7 +6,7 @@ namespace Hazzik.Qif.Parsers
     {
         public override void Yield(QifDocument document)
         {
-            document.BankTransactions.Add(Item);
+            document.AddTransaction(GetType().Name, Item);
             Item = new BasicTransaction();
         }
     }

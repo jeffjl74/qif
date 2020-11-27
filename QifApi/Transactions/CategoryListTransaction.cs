@@ -40,7 +40,7 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the budget amount.
         /// </summary>
         /// <value>The budget amount.</value>
-        public decimal BudgetAmount { get; set; }
+        public decimal? BudgetAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the tax schedule.

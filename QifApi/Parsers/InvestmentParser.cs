@@ -3,13 +3,16 @@ using Hazzik.Qif.Transactions.Fields;
 
 namespace Hazzik.Qif.Parsers
 {
+    /// <summary>
+    /// Parses a <see cref="Headers.Investment"/> record into a <see cref="InvestmentTransaction"/> which is added to the document when <see cref="Yield(QifDocument)"/> is called.
+    /// </summary>
     class InvestmentParser : IParser
     {
         private InvestmentTransaction item = new InvestmentTransaction();
 
         public void Yield(QifDocument document)
         {
-            document.InvestmentTransactions.Add(item); 
+            document.AddTransaction(GetType().Name, item);
             item = new InvestmentTransaction();
         }
 
@@ -48,11 +51,17 @@ namespace Hazzik.Qif.Parsers
                 case InvestmentAccountFields.TransactionAmount:
                     item.TransactionAmount = Common.GetDecimal(value);
                     break;
+                case InvestmentAccountFields.TransactionAmountU:
+                    item.TransactionAmountU = Common.GetDecimal(value);
+                    break;
                 case InvestmentAccountFields.AccountForTransfer:
                     item.AccountForTransfer = value;
                     break;
                 case InvestmentAccountFields.AmountTransferred:
                     item.AmountTransferred = Common.GetDecimal(value);
+                    break;
+                default:
+                    item.ignoredLines.Add(line);
                     break;
             }
         }

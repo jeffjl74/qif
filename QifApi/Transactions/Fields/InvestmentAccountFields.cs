@@ -31,6 +31,10 @@ namespace Hazzik.Qif.Transactions.Fields
         /// </summary>
         public const char TransactionAmount = 'T';
         /// <summary>
+        /// Transaction amount from the U line
+        /// </summary>
+        public const char TransactionAmountU = 'U';
+        /// <summary>
         /// Cleared status
         /// </summary>
         public const char ClearedStatus = 'C';

@@ -16,34 +16,17 @@ namespace Hazzik.Qif.Writers
 
                 foreach (var item in list)
                 {
-                    writer.Write(NonInvestmentAccountFields.Date);
-                    writer.WriteLine(item.Date.ToString("d"));
+                    writer.WriteLine($"{NonInvestmentAccountFields.Date}{item.Date:d}");
 
-                    foreach (string address in item.Address)
-                    {
-                        writer.Write(NonInvestmentAccountFields.Address);
-                        writer.WriteLine(address);
-                    }
+                    if (item.AmountU.HasValue)
+                        writer.WriteLine($"{NonInvestmentAccountFields.AmountU}{item.AmountU:n}");
 
-                    writer.Write(NonInvestmentAccountFields.Amount);
-                    writer.WriteLine(item.Amount.ToString(CultureInfo.CurrentCulture));
-
-                    if (!string.IsNullOrEmpty(item.Category))
-                    {
-                        writer.Write(NonInvestmentAccountFields.Category);
-                        writer.WriteLine(item.Category);
-                    }
+                    writer.WriteLine($"{NonInvestmentAccountFields.Amount}{item.Amount:n}");
 
                     if (!string.IsNullOrEmpty(item.ClearedStatus))
                     {
                         writer.Write(NonInvestmentAccountFields.ClearedStatus);
                         writer.WriteLine(item.ClearedStatus);
-                    }
-
-                    if (!string.IsNullOrEmpty(item.Memo))
-                    {
-                        writer.Write(NonInvestmentAccountFields.Memo);
-                        writer.WriteLine(item.Memo);
                     }
 
                     if (!string.IsNullOrEmpty(item.Number))
@@ -58,19 +41,33 @@ namespace Hazzik.Qif.Writers
                         writer.WriteLine(item.Payee);
                     }
 
-                    foreach (int i in item.SplitCategories.Keys)
+                    if (!string.IsNullOrEmpty(item.Memo))
                     {
-                        writer.Write(NonInvestmentAccountFields.SplitCategory);
-                        writer.WriteLine(item.SplitCategories[i]);
-                        writer.Write(NonInvestmentAccountFields.SplitAmount);
-                        writer.WriteLine(item.SplitAmounts[i]);
+                        writer.Write(NonInvestmentAccountFields.Memo);
+                        writer.WriteLine(item.Memo);
+                    }
 
-                        string value;
-                        if (item.SplitMemos.TryGetValue(i, out value))
-                        {
-                            writer.Write(NonInvestmentAccountFields.SplitMemo);
-                            writer.WriteLine(value);
-                        }
+                    if (!string.IsNullOrEmpty(item.Category))
+                    {
+                        writer.Write(NonInvestmentAccountFields.Category);
+                        writer.WriteLine(item.Category);
+                    }
+
+                    foreach (string address in item.Address)
+                    {
+                        writer.Write(NonInvestmentAccountFields.Address);
+                        writer.WriteLine(address);
+                    }
+
+                    foreach (SplitTransaction split in item.Splits)
+                    {
+                        writer.WriteLine($"{NonInvestmentAccountFields.SplitCategory}{split.Category}");
+                        if (!string.IsNullOrEmpty(split.Memo))
+                            writer.WriteLine($"{NonInvestmentAccountFields.SplitMemo}{split.Memo}");
+                        if (split.Amount.HasValue)
+                            writer.WriteLine($"{NonInvestmentAccountFields.SplitAmount}{split.Amount:n}");
+                        if (split.Percentage.HasValue)
+                            writer.WriteLine($"{NonInvestmentAccountFields.SplitPercentage}{split.Percentage}");
                     }
 
                     writer.WriteLine(InformationFields.EndOfEntry);

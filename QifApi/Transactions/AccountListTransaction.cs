@@ -29,7 +29,7 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the credit limit.
         /// </summary>
         /// <value>The credit limit.</value>
-        public decimal CreditLimit { get; set; }
+        public decimal? CreditLimit { get; set; }
 
         /// <summary>
         /// Gets or sets the statement balance date.
@@ -41,7 +41,7 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the statement balance.
         /// </summary>
         /// <value>The statement balance.</value>
-        public decimal StatementBalance { get; set; }
+        public decimal? StatementBalance { get; set; }
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

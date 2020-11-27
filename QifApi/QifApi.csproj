@@ -36,6 +36,19 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Parsers\BasicTransactionParser.cs" />
+    <Compile Include="Parsers\PriceParser.cs" />
+    <Compile Include="Parsers\UnhandledTypeParser.cs" />
+    <Compile Include="Parsers\TagParser.cs" />
+    <Compile Include="Parsers\SecurityParser.cs" />
+    <Compile Include="Transactions\AutoSwitchAccount.cs" />
+    <Compile Include="Transactions\AutoSwitchAccountList.cs" />
+    <Compile Include="Transactions\Fields\TagFields.cs" />
+    <Compile Include="Transactions\PriceRecord.cs" />
+    <Compile Include="Transactions\SplitTransaction.cs" />
+    <Compile Include="Transactions\UnhandledTypeTransaction.cs" />
+    <Compile Include="Transactions\TagTransaction.cs" />
+    <Compile Include="Transactions\SecurityTransaction.cs" />
+    <Compile Include="Transactions\Fields\SecurityFields.cs" />
     <Compile Include="Transactions\Fields\InformationFields.cs" />
     <Compile Include="Writers\AccountListWriter.cs" />
     <Compile Include="Parsers\AccountListParser.cs" />
@@ -43,6 +56,10 @@
     <Compile Include="Writers\BasicTransactionWriter.cs" />
     <Compile Include="Parsers\BankParser.cs" />
     <Compile Include="Parsers\CashParser.cs" />
+    <Compile Include="Writers\AutoSwitchAccountListWriter.cs" />
+    <Compile Include="Writers\PriceListWriter.cs" />
+    <Compile Include="Writers\TagListWriter.cs" />
+    <Compile Include="Writers\SecurityListWriter.cs" />
     <Compile Include="Writers\CategoryListWriter.cs" />
     <Compile Include="Parsers\CategoryListParser.cs" />
     <Compile Include="Writers\ClassListWriter.cs" />
@@ -87,7 +104,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="QifApi.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QIF-File-Format.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

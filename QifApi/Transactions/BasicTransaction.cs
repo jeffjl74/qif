@@ -19,7 +19,13 @@ namespace Hazzik.Qif.Transactions
         /// Gets or sets the amount.
         /// </summary>
         /// <value>The amount.</value>
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the U line amount.
+        /// </summary>
+        /// <value>The U line amount.</value>
+        public decimal? AmountU { get; set; }
 
         /// <summary>
         /// Gets or sets the cleared status.
@@ -57,23 +63,25 @@ namespace Hazzik.Qif.Transactions
         /// <value>The address.</value>
         public IList<string> Address { get; } = new List<string>();
 
+        public IList<SplitTransaction> Splits { get; } = new List<SplitTransaction>();
+
         /// <summary>
         /// Gets or sets the split categories.
         /// </summary>
         /// <value>The split categories.</value>
-        public IDictionary<int, string> SplitCategories { get; } = new Dictionary<int, string>();
+        //public IDictionary<int, string> SplitCategories { get; } = new Dictionary<int, string>();
 
         /// <summary>
         /// Gets or sets the split memos.
         /// </summary>
         /// <value>The split memos.</value>
-        public IDictionary<int, string> SplitMemos { get; } = new Dictionary<int, string>();
+        //public IDictionary<int, string> SplitMemos { get; } = new Dictionary<int, string>();
 
         /// <summary>
         /// Gets or sets the split amounts.
         /// </summary>
         /// <value>The split amounts.</value>
-        public IDictionary<int, decimal> SplitAmounts { get; } = new Dictionary<int, decimal>();
+        //public IDictionary<int, decimal> SplitAmounts { get; } = new Dictionary<int, decimal>();
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -83,7 +91,7 @@ namespace Hazzik.Qif.Transactions
         /// </returns>
         public override string ToString()
         {
-            return string.Format(Resources.Culture, Resources.BasicTransactionDisplay, Date.ToString("d", CultureInfo.CurrentCulture), Payee, Amount.ToString("C2", CultureInfo.CurrentCulture));
+            return string.Format(Resources.Culture, Resources.BasicTransactionDisplay, Date.ToString("d", CultureInfo.CurrentCulture), Payee, Amount);
         }
     }
 }

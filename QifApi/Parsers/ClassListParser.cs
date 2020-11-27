@@ -9,7 +9,7 @@ namespace Hazzik.Qif.Parsers
 
         public void Yield(QifDocument document)
         {
-            document.ClassListTransactions.Add(item);
+            document.AddTransaction(GetType().Name, item);
             item = new ClassListTransaction();
         }
 
@@ -23,6 +23,9 @@ namespace Hazzik.Qif.Parsers
                     break;
                 case ClassListFields.Description:
                     item.Description = value;
+                    break;
+                default:
+                    item.ignoredLines.Add(line);
                     break;
             }
         }

@@ -15,6 +15,10 @@ namespace Hazzik.Qif.Transactions.Fields
         /// </summary>
         public const char Amount = 'T';
         /// <summary>
+        /// Amount from the U line
+        /// </summary>
+        public const char AmountU = 'U';
+        /// <summary>
         /// Cleared status
         /// </summary>
         public const char ClearedStatus = 'C';
@@ -50,5 +54,9 @@ namespace Hazzik.Qif.Transactions.Fields
         /// Dollar amount of split
         /// </summary>
         public const char SplitAmount = '$';
+        /// <summary>
+        /// Split percetange
+        /// </summary>
+        public const char SplitPercentage = '%';
     }
 }
