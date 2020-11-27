@@ -61,9 +61,3 @@ qif.AutoSwitchAccountList.autoSwitchAccounts[0].InvestmentTransactions.Add(trans
 qif.Save(File.Open(@"c:\quicken-mod.qif", FileMode.Create));
 ```
 
-All transactions present in the DOM are written according to the QIF file format specification. Dates and numbers should be written according to globalization standards.
-
-# Available on [NuGet](http://www.nuget.org/packages/hazzik.qif)
-```PowerShell
-Install-Package Hazzik.Qif
-```
