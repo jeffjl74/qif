@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using Hazzik.Qif.Parsers;
-using Hazzik.Qif.Transactions;
-using Hazzik.Qif.Transactions.Fields;
-using Hazzik.Qif.Writers;
+using QifDoc.Qif.Parsers;
+using QifDoc.Qif.Transactions;
+using QifDoc.Qif.Transactions.Fields;
+using QifDoc.Qif.Writers;
 
-namespace Hazzik.Qif
+namespace QifDoc.Qif
 {
     /// <summary>
     /// Represents a Document Object Model for a QIF file.

@@ -1,5 +1,5 @@
 ﻿
-namespace Hazzik.Qif.Transactions
+namespace QifDoc.Qif.Transactions
 {
     /// <summary>
     /// A class to associate the Category, Memo, Amount, and Percentage lines of a split transaction

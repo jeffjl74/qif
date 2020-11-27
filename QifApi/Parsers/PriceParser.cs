@@ -1,7 +1,7 @@
-﻿using Hazzik.Qif.Transactions;
-using Hazzik.Qif.Transactions.Fields;
+﻿using QifDoc.Qif.Transactions;
+using QifDoc.Qif.Transactions.Fields;
 
-namespace Hazzik.Qif.Parsers
+namespace QifDoc.Qif.Parsers
 {
     /// <summary>
     /// Parses a <see cref="Headers.TagList"/> record into a <see cref="PriceRecord"/> which is added to the document when <see cref="Yield(QifDocument)"/> is called.

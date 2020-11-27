@@ -1,7 +1,7 @@
-﻿using Hazzik.Qif.Transactions;
-using Hazzik.Qif.Transactions.Fields;
+﻿using QifDoc.Qif.Transactions;
+using QifDoc.Qif.Transactions.Fields;
 
-namespace Hazzik.Qif.Parsers
+namespace QifDoc.Qif.Parsers
 {
     /// <summary>
     /// Abstract class that parses for the <see cref="NonInvestmentAccountFields"/>

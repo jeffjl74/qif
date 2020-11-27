@@ -1,4 +1,4 @@
-namespace Hazzik.Qif
+namespace QifDoc.Qif
 {
     interface IParser
     {

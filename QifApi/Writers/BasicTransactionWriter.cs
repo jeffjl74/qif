@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using Hazzik.Qif.Transactions;
-using Hazzik.Qif.Transactions.Fields;
+using QifDoc.Qif.Transactions;
+using QifDoc.Qif.Transactions.Fields;
 
-namespace Hazzik.Qif.Writers
+namespace QifDoc.Qif.Writers
 {
     static class BasicTransactionWriter
     {

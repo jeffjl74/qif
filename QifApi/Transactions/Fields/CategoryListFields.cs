@@ -1,5 +1,5 @@
 ﻿
-namespace Hazzik.Qif.Transactions.Fields
+namespace QifDoc.Qif.Transactions.Fields
 {
     /// <summary>
     /// The category list fields used in transactions.

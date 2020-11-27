@@ -1,6 +1,6 @@
-﻿using Hazzik.Qif.Transactions;
+﻿using QifDoc.Qif.Transactions;
 
-namespace Hazzik.Qif.Parsers
+namespace QifDoc.Qif.Parsers
 {
     /// <summary>
     /// Collects the lines of an unrecognized transaction. Lines are not parsed.

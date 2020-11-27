@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Hazzik.Qif.Transactions;
+using QifDoc.Qif.Transactions;
 
-namespace Hazzik.Qif
+namespace QifDoc.Qif
 {
     /// <summary>
     /// This class contains a single <see cref="AccountListTransaction"/> plus lists for each transaction type

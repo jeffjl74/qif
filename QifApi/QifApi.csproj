@@ -8,8 +8,8 @@
     <ProjectGuid>{80519FD2-924F-4A95-B892-F8A97938FC97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hazzik.Qif</RootNamespace>
-    <AssemblyName>Hazzik.Qif</AssemblyName>
+    <RootNamespace>QifDoc.Qif</RootNamespace>
+    <AssemblyName>QifDoc.Qif</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

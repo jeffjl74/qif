@@ -1,5 +1,5 @@
 ﻿
-namespace Hazzik.Qif.Transactions
+namespace QifDoc.Qif.Transactions
 {
     /// <summary>
     /// A tag list transaction.

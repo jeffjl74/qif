@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Hazzik.Qif.Transactions
+namespace QifDoc.Qif.Transactions
 {
     /// <summary>
     /// A basic transaction. It is used to describe non-investment transactions.

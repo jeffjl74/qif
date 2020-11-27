@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hazzik.Qif.Transactions
+namespace QifDoc.Qif.Transactions
 {
     /// <summary>
     /// The base transaction from which all transactions must derive.

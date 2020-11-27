@@ -1,6 +1,6 @@
-using Hazzik.Qif.Transactions;
+using QifDoc.Qif.Transactions;
 
-namespace Hazzik.Qif.Parsers
+namespace QifDoc.Qif.Parsers
 {
     class CashParser : BasicTransactionParser
     {

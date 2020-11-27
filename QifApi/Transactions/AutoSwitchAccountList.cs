@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Hazzik.Qif.Parsers;
-using Hazzik.Qif.Transactions;
+using QifDoc.Qif.Parsers;
+using QifDoc.Qif.Transactions;
 
-namespace Hazzik.Qif
+namespace QifDoc.Qif
 {
     /// <summary>
     /// Represents a list of <see cref="AutoSwitchAccount"/>s.

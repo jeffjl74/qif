@@ -1,4 +1,4 @@
-﻿namespace Hazzik.Qif.Transactions.Fields
+﻿namespace QifDoc.Qif.Transactions.Fields
 {
     /// <summary>
     /// The information fields used in transactions.

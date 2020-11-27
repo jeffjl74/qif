@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Hazzik.Qif.Transactions
+namespace QifDoc.Qif.Transactions
 {
     /// <summary>
     /// A <see cref="Headers.PriceList"/> record
