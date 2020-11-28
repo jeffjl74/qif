@@ -8,8 +8,8 @@
     <ProjectGuid>{B9D64D43-E7B0-4A6F-B109-295D40D68135}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApiTest</RootNamespace>
-    <AssemblyName>ApiTest</AssemblyName>
+    <RootNamespace>QifInspector</RootNamespace>
+    <AssemblyName>QifInsepctor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

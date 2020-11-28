@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace QifApiTest
+namespace QifInspector
 {
     static class Program
     {

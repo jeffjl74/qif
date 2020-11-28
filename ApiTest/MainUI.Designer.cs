@@ -1,4 +1,4 @@
-﻿namespace QifApiTest
+﻿namespace QifInspector
 {
     partial class MainUI
     {
@@ -28,45 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.qifDomPropertyGrid = new System.Windows.Forms.PropertyGrid();
-            this.exportButton = new System.Windows.Forms.Button();
-            this.newButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.importButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // qifDomPropertyGrid
-            // 
-            this.qifDomPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.qifDomPropertyGrid.Location = new System.Drawing.Point(0, 41);
-            this.qifDomPropertyGrid.Name = "qifDomPropertyGrid";
-            this.qifDomPropertyGrid.Size = new System.Drawing.Size(446, 282);
-            this.qifDomPropertyGrid.TabIndex = 0;
-            // 
-            // exportButton
-            // 
-            this.exportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.exportButton.Location = new System.Drawing.Point(359, 329);
-            this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(75, 23);
-            this.exportButton.TabIndex = 1;
-            this.exportButton.Text = "E&xport";
-            this.exportButton.UseVisualStyleBackColor = true;
-            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
-            // 
-            // newButton
-            // 
-            this.newButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.newButton.Location = new System.Drawing.Point(12, 329);
-            this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(75, 23);
-            this.newButton.TabIndex = 1;
-            this.newButton.Text = "&New";
-            this.newButton.UseVisualStyleBackColor = true;
-            this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
             // saveFileDialog
             // 
@@ -76,8 +52,8 @@
             // 
             // importButton
             // 
-            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.importButton.Location = new System.Drawing.Point(359, 12);
+            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.importButton.Location = new System.Drawing.Point(471, 12);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 2;
@@ -90,29 +66,88 @@
             this.openFileDialog.Filter = "QIF Files (*.qif)|*.qif|All Files (*.*)|*.*";
             this.openFileDialog.Title = "Open File...";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.listBox1);
+            this.splitContainer1.Size = new System.Drawing.Size(558, 370);
+            this.splitContainer1.SplitterDistance = 202;
+            this.splitContainer1.TabIndex = 3;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(352, 370);
+            this.listBox1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.splitContainer1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(558, 370);
+            this.panel1.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.importButton);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 370);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(558, 47);
+            this.panel2.TabIndex = 5;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(202, 370);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 364);
-            this.Controls.Add(this.importButton);
-            this.Controls.Add(this.newButton);
-            this.Controls.Add(this.exportButton);
-            this.Controls.Add(this.qifDomPropertyGrid);
+            this.ClientSize = new System.Drawing.Size(558, 417);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Name = "MainUI";
-            this.Text = "Qif Export Test";
+            this.Text = "Qif Inspector";
+            this.Load += new System.EventHandler(this.MainUI_Load);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PropertyGrid qifDomPropertyGrid;
-        private System.Windows.Forms.Button exportButton;
-        private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 
