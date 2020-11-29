@@ -17,32 +17,32 @@ namespace QifDoc.Qif
         /// <summary>
         /// Represents a collection of bank transactions.
         /// </summary>
-        public IList<BasicTransaction> BankTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> BankTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of cash transactions.
         /// </summary>
-        public IList<BasicTransaction> CashTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> CashTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of credit card transactions.
         /// </summary>
-        public IList<BasicTransaction> CreditCardTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> CreditCardTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of investment transactions.
         /// </summary>
-        public IList<InvestmentTransaction> InvestmentTransactions { get; } = new List<InvestmentTransaction>();
+        public List<InvestmentTransaction> InvestmentTransactions { get; } = new List<InvestmentTransaction>();
 
         /// <summary>
         /// Represents a collection of asset transactions.
         /// </summary>
-        public IList<BasicTransaction> AssetTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> AssetTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of liability transactions.
         /// </summary>
-        public IList<BasicTransaction> LiabilityTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> LiabilityTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Constructor sets the account to which transactions are associated.

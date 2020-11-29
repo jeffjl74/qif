@@ -23,67 +23,67 @@ namespace QifDoc.Qif
         /// <summary>
         /// Represents a collection of bank transactions.
         /// </summary>
-        public IList<BasicTransaction> BankTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> BankTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of cash transactions.
         /// </summary>
-        public IList<BasicTransaction> CashTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> CashTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of credit card transactions.
         /// </summary>
-        public IList<BasicTransaction> CreditCardTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> CreditCardTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of investment transactions.
         /// </summary>
-        public IList<InvestmentTransaction> InvestmentTransactions { get; } = new List<InvestmentTransaction>();
+        public List<InvestmentTransaction> InvestmentTransactions { get; } = new List<InvestmentTransaction>();
 
         /// <summary>
         /// Represents a collection of asset transactions.
         /// </summary>
-        public IList<BasicTransaction> AssetTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> AssetTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of liability transactions.
         /// </summary>
-        public IList<BasicTransaction> LiabilityTransactions { get; } = new List<BasicTransaction>();
+        public List<BasicTransaction> LiabilityTransactions { get; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of account list transactions.
         /// </summary>
-        public IList<AccountListTransaction> AccountList { get; } = new List<AccountListTransaction>();
+        public List<AccountListTransaction> AccountList { get; } = new List<AccountListTransaction>();
 
         /// <summary>
         /// Represents a collection of category list transactions.
         /// </summary>
-        public IList<CategoryListTransaction> CategoryListTransactions { get; } = new List<CategoryListTransaction>();
+        public List<CategoryListTransaction> CategoryListTransactions { get; } = new List<CategoryListTransaction>();
 
         /// <summary>
         /// Represents a collection of class list transactions.
         /// </summary>
-        public IList<ClassListTransaction> ClassListTransactions { get; } = new List<ClassListTransaction>();
+        public List<ClassListTransaction> ClassListTransactions { get; } = new List<ClassListTransaction>();
 
         /// <summary>
         /// Represents a collection of memorized transaction list transactions.
         /// </summary>
-        public IList<MemorizedTransactionListTransaction> MemorizedTransactionListTransactions { get; } = new List<MemorizedTransactionListTransaction>();
+        public List<MemorizedTransactionListTransaction> MemorizedTransactionListTransactions { get; } = new List<MemorizedTransactionListTransaction>();
 
         /// <summary>
         /// Represents a collection of tags.
         /// </summary>
-        public IList<TagTransaction> TagTransactions { get; } = new List<TagTransaction>();
+        public List<TagTransaction> TagTransactions { get; } = new List<TagTransaction>();
 
         /// <summary>
         /// Represents a collection of securities.
         /// </summary>
-        public IList<PriceRecord> PriceTransactions { get; } = new List<PriceRecord>();
+        public List<PriceRecord> PriceTransactions { get; } = new List<PriceRecord>();
 
         /// <summary>
         /// Represents a collection of securities.
         /// </summary>
-        public IList<SecurityTransaction> SecurityTransactions { get; } = new List<SecurityTransaction>();
+        public List<SecurityTransaction> SecurityTransactions { get; } = new List<SecurityTransaction>();
 
         /// <summary>
         /// A collection of accounts with their associated transactions. Activated via !Option:AutoSwitch
@@ -93,7 +93,7 @@ namespace QifDoc.Qif
         /// <summary>
         /// A collection of unrecognized lines
         /// </summary>
-        public IList<UnhandledTypeTransaction> UnhandledTypeTransactions { get; } = new List<UnhandledTypeTransaction>();
+        public List<UnhandledTypeTransaction> UnhandledTypeTransactions { get; } = new List<UnhandledTypeTransaction>();
 
         /// <summary>
         /// Saves the QIF document to the <see cref="Stream"/>.
@@ -114,11 +114,10 @@ namespace QifDoc.Qif
             TagListWriter.Write(writer, TagTransactions);
             CategoryListWriter.Write(writer, CategoryListTransactions);
             ClassListWriter.Write(writer, ClassListTransactions);
-            AccountListWriter.Write(writer, AccountList);
-            AutoSwitchAccountListWriter.Write(writer, AutoSwitchAccountList, SecurityTransactions);
-            // SecurityTransactions were written by AutoSwitchAccountListWriter if it had any accounts
             if (AutoSwitchAccountList.autoSwitchAccounts.Count == 0)
                 SecurityListWriter.Write(writer, SecurityTransactions);
+            AccountListWriter.Write(writer, AccountList);
+            AutoSwitchAccountListWriter.Write(writer, AutoSwitchAccountList, SecurityTransactions);
             BasicTransactionWriter.Write(writer, Headers.Asset, AssetTransactions);
             BasicTransactionWriter.Write(writer, Headers.Bank, BankTransactions);
             BasicTransactionWriter.Write(writer, Headers.Cash, CashTransactions);

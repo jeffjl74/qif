@@ -12,7 +12,7 @@ namespace QifDoc.Qif
         /// <summary>
         /// List of AutoSwitchAccount
         /// </summary>
-        public IList<AutoSwitchAccount> autoSwitchAccounts = new List<AutoSwitchAccount>();
+        public List<AutoSwitchAccount> autoSwitchAccounts = new List<AutoSwitchAccount>();
 
         /// <summary>
         /// The index of the autoSwitchAccounts list for the account currently accepting transactions.

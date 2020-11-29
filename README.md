@@ -10,8 +10,9 @@ This fork includes the following changes:
 * Support !Type:Tag - transaction tags
 * Uses C# 6.0 language features - especially decimal? to avoid writing fields that were not set, and $ in place of string.Format()
 * Rearranged Save() line order to match the order of Quicken 2013 exports (and the order in the QIF file format documentation)
-* Collects unrecognized lines into accessable List<string> rather than ignoring them or throwing exceptions
+* Collects unrecognized lines into accessable Lists rather than ignoring them or throwing exceptions
 * Better handling of splits with missing field line(s)
+* Changed transaction lists from IList to List to provide .Find() for transactions
 
 Mixing AutoSwiched accounts with non-switched accounts could result in a file that other programs might have issues with.
 

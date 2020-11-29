@@ -88,7 +88,8 @@ namespace QifInspector
                         else
                         {
                             AutoSwitchAccountList asl = obj as AutoSwitchAccountList;
-                            text += $" ({asl.autoSwitchAccounts.Count})";
+                            if(asl.autoSwitchAccounts.Count > 0)
+                                text += $" ({asl.autoSwitchAccounts.Count})";
                         }
                         TreeNode node = new TreeNode(text);
                         node.Name = prop.Name;
