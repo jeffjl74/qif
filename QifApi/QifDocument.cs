@@ -23,77 +23,77 @@ namespace QifDoc.Qif
         /// <summary>
         /// Represents a collection of bank transactions.
         /// </summary>
-        public List<BasicTransaction> BankTransactions = new List<BasicTransaction>();
+        public List<BasicTransaction> BankTransactions { get; set; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of cash transactions.
         /// </summary>
-        public List<BasicTransaction> CashTransactions = new List<BasicTransaction>();
+        public List<BasicTransaction> CashTransactions { get; set; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of credit card transactions.
         /// </summary>
-        public List<BasicTransaction> CreditCardTransactions = new List<BasicTransaction>();
+        public List<BasicTransaction> CreditCardTransactions { get; set; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of investment transactions.
         /// </summary>
-        public List<InvestmentTransaction> InvestmentTransactions = new List<InvestmentTransaction>();
+        public List<InvestmentTransaction> InvestmentTransactions { get; set; } = new List<InvestmentTransaction>();
 
         /// <summary>
         /// Represents a collection of asset transactions.
         /// </summary>
-        public List<BasicTransaction> AssetTransactions = new List<BasicTransaction>();
+        public List<BasicTransaction> AssetTransactions { get; set; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of liability transactions.
         /// </summary>
-        public List<BasicTransaction> LiabilityTransactions = new List<BasicTransaction>();
+        public List<BasicTransaction> LiabilityTransactions { get; set; } = new List<BasicTransaction>();
 
         /// <summary>
         /// Represents a collection of account list transactions.
         /// </summary>
-        public List<AccountListTransaction> AccountList = new List<AccountListTransaction>();
+        public List<AccountListTransaction> AccountList { get; set; } = new List<AccountListTransaction>();
 
         /// <summary>
         /// Represents a collection of category list transactions.
         /// </summary>
-        public List<CategoryListTransaction> CategoryListTransactions = new List<CategoryListTransaction>();
+        public List<CategoryListTransaction> CategoryListTransactions { get; set; } = new List<CategoryListTransaction>();
 
         /// <summary>
         /// Represents a collection of class list transactions.
         /// </summary>
-        public List<ClassListTransaction> ClassListTransactions = new List<ClassListTransaction>();
+        public List<ClassListTransaction> ClassListTransactions { get; set; } = new List<ClassListTransaction>();
 
         /// <summary>
         /// Represents a collection of memorized transaction list transactions.
         /// </summary>
-        public List<MemorizedTransactionListTransaction> MemorizedTransactionListTransactions = new List<MemorizedTransactionListTransaction>();
+        public List<MemorizedTransactionListTransaction> MemorizedTransactionListTransactions { get; set; } = new List<MemorizedTransactionListTransaction>();
 
         /// <summary>
         /// Represents a collection of tags.
         /// </summary>
-        public List<TagTransaction> TagTransactions = new List<TagTransaction>();
+        public List<TagTransaction> TagTransactions { get; set; } = new List<TagTransaction>();
 
         /// <summary>
         /// Represents a collection of securities.
         /// </summary>
-        public List<PriceRecord> PriceTransactions = new List<PriceRecord>();
+        public List<PriceRecord> PriceTransactions { get; set; } = new List<PriceRecord>();
 
         /// <summary>
         /// Represents a collection of securities.
         /// </summary>
-        public List<SecurityTransaction> SecurityTransactions = new List<SecurityTransaction>();
+        public List<SecurityTransaction> SecurityTransactions { get; set; } = new List<SecurityTransaction>();
 
         /// <summary>
         /// A collection of accounts with their associated transactions. Activated via !Option:AutoSwitch
         /// </summary>
-        public AutoSwitchAccountList AutoSwitchAccountList = new AutoSwitchAccountList();
+        public AutoSwitchAccountList AutoSwitchAccountList { get; set; } = new AutoSwitchAccountList();
 
         /// <summary>
         /// A collection of unrecognized lines
         /// </summary>
-        public List<UnhandledTypeTransaction> UnhandledTypeTransactions = new List<UnhandledTypeTransaction>();
+        public List<UnhandledTypeTransaction> UnhandledTypeTransactions { get; set; } = new List<UnhandledTypeTransaction>();
 
         /// <summary>
         /// Saves the QIF document to the <see cref="Stream"/>.
