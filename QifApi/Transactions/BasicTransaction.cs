@@ -63,25 +63,10 @@ namespace QifDoc.Qif.Transactions
         /// <value>The address.</value>
         public IList<string> Address { get; } = new List<string>();
 
+        /// <summary>
+        /// Gets or sets a <see cref="SplitTransaction"/>
+        /// </summary>
         public IList<SplitTransaction> Splits { get; } = new List<SplitTransaction>();
-
-        /// <summary>
-        /// Gets or sets the split categories.
-        /// </summary>
-        /// <value>The split categories.</value>
-        //public IDictionary<int, string> SplitCategories { get; } = new Dictionary<int, string>();
-
-        /// <summary>
-        /// Gets or sets the split memos.
-        /// </summary>
-        /// <value>The split memos.</value>
-        //public IDictionary<int, string> SplitMemos { get; } = new Dictionary<int, string>();
-
-        /// <summary>
-        /// Gets or sets the split amounts.
-        /// </summary>
-        /// <value>The split amounts.</value>
-        //public IDictionary<int, decimal> SplitAmounts { get; } = new Dictionary<int, decimal>();
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

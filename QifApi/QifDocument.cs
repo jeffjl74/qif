@@ -114,9 +114,9 @@ namespace QifDoc.Qif
             TagListWriter.Write(writer, TagTransactions);
             CategoryListWriter.Write(writer, CategoryListTransactions);
             ClassListWriter.Write(writer, ClassListTransactions);
+            AccountListWriter.Write(writer, AccountList);
             if (AutoSwitchAccountList.autoSwitchAccounts.Count == 0)
                 SecurityListWriter.Write(writer, SecurityTransactions);
-            AccountListWriter.Write(writer, AccountList);
             AutoSwitchAccountListWriter.Write(writer, AutoSwitchAccountList, SecurityTransactions);
             BasicTransactionWriter.Write(writer, Headers.Asset, AssetTransactions);
             BasicTransactionWriter.Write(writer, Headers.Bank, BankTransactions);
