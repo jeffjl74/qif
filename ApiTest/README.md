@@ -5,4 +5,4 @@ This project is not really meant to show the programmer how to use the QIF libra
 
 The parsing of the sample QIF shown in the API README.md is shown below:
 
-![Qif Inspector Example](ApiTest/images/QifInspector.PNG)
+![Qif Inspector Example](images/QifInspector.PNG?raw=true)
